@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Haze White — AI Visual Artist</title>
+<meta name="description" content="Haze White is an AI visual artist creating cinematic portraits and atmospheric short films.">
+<meta property="og:title" content="Haze White — AI Visual Artist">
+<meta property="og:description" content="Cinematic portraits and atmospheric short films.">
+<meta property="og:image" content="assets/stillness.jpg">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#f2f1ef">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%23f2f1ef'/%3E%3Ctext x='32' y='44' font-family='Georgia,serif' font-size='34' text-anchor='middle' fill='%232f3540'%3EH%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300&family=Jost:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --mist: #f2f1ef;
+    --mist-deep: #e6e5e3;
+    --ink: #2f3540;
+    --muted: #7d828c;
+    --line: rgba(47, 53, 64, .14);
+    --serif: "Cormorant Garamond", Georgia, serif;
+    --sans: "Jost", system-ui, sans-serif;
+    --gutter: clamp(20px, 5vw, 64px);
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--mist);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-weight: 300;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+  img, video { display: block; max-width: 100%; }
+  a { color: inherit; }
+
+  /* ---------- header ---------- */
+  header {
+    position: fixed; inset: 0 0 auto 0; z-index: 10;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 22px var(--gutter);
+    transition: background .5s, backdrop-filter .5s;
+  }
+  header.solid { background: rgba(242, 241, 239, .82); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); }
+  .mark { font-family: var(--serif); font-size: 15px; letter-spacing: .42em; text-decoration: none; }
+  nav { display: flex; gap: clamp(16px, 3vw, 36px); }
+  nav a { font-size: 12px; letter-spacing: .22em; text-transform: uppercase; text-decoration: none; color: var(--muted); transition: color .3s; }
+  nav a:hover { color: var(--ink); }
+
+  /* ---------- hero ---------- */
+  .hero {
+    position: relative; min-height: 100svh;
+    display: grid; place-items: end start;
+    padding: 0 var(--gutter) clamp(56px, 10vh, 120px);
+    overflow: hidden;
+  }
+  .hero-img {
+    position: absolute; inset: 0;
+    background: url("assets/stillness.jpg") center 22% / cover no-repeat;
+    animation: drift 24s ease-in-out infinite alternate;
+  }
+  .hero::after {
+    content: ""; position: absolute; inset: 0;
+    background:
+      linear-gradient(to top, var(--mist) 2%, rgba(242,241,239,.72) 30%, rgba(242,241,239,0) 64%),
+      linear-gradient(to right, rgba(242,241,239,.55), rgba(242,241,239,0) 55%);
+  }
+  @keyframes drift { from { transform: scale(1.04); } to { transform: scale(1.12) translateY(-1.5%); } }
+  .hero-text { position: relative; z-index: 1; max-width: 640px; }
+  .eyebrow { font-size: 12px; letter-spacing: .32em; text-transform: uppercase; color: var(--muted); }
+  h1 {
+    font-family: var(--serif); font-weight: 300;
+    font-size: clamp(56px, 11vw, 132px); line-height: .95; letter-spacing: .02em;
+    margin: 18px 0 22px;
+  }
+  .lede { font-family: var(--serif); font-style: italic; font-size: clamp(20px, 2.4vw, 26px); color: #4a505b; max-width: 30ch; line-height: 1.45; }
+
+  /* ---------- sections ---------- */
+  section { padding: clamp(80px, 14vh, 160px) var(--gutter); }
+  .label { display: flex; align-items: center; gap: 18px; font-size: 12px; letter-spacing: .32em; text-transform: uppercase; color: var(--muted); margin-bottom: clamp(36px, 6vh, 64px); }
+  .label::after { content: ""; flex: 1; height: 1px; background: var(--line); }
+  h2 { font-family: var(--serif); font-weight: 300; font-size: clamp(40px, 6vw, 72px); line-height: 1.05; }
+
+  /* ---------- film ---------- */
+  .film { display: grid; grid-template-columns: minmax(0, 420px) minmax(0, 1fr); gap: clamp(32px, 7vw, 110px); align-items: center; max-width: 1180px; margin: 0 auto; }
+  .frame { position: relative; aspect-ratio: 9 / 16; background: var(--mist-deep); overflow: hidden; box-shadow: 0 40px 80px -40px rgba(47,53,64,.35); }
+  .frame video { width: 100%; height: 100%; object-fit: cover; }
+  .sound {
+    position: absolute; right: 14px; bottom: 14px;
+    border: 1px solid rgba(255,255,255,.7); background: rgba(47,53,64,.28); color: #fff;
+    font: 400 11px/1 var(--sans); letter-spacing: .2em; text-transform: uppercase;
+    padding: 10px 14px; cursor: pointer; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+  }
+  .film-meta { font-size: 12px; letter-spacing: .24em; text-transform: uppercase; color: var(--muted); margin: 18px 0 28px; }
+  .film p { max-width: 42ch; color: #4a505b; }
+  .film p + p { margin-top: 1em; }
+
+  /* ---------- stills ---------- */
+  .stills { display: grid; align-items: start; grid-template-columns: repeat(4, 1fr); gap: clamp(10px, 1.6vw, 22px); max-width: 1180px; margin: 0 auto; }
+  .stills figure { overflow: hidden; }
+  .stills .ph { overflow: hidden; background: var(--mist-deep); }
+  .stills img { width: 100%; aspect-ratio: 9 / 16; object-fit: cover; transition: transform 1.6s cubic-bezier(.2,.7,.2,1), filter 1.6s; filter: saturate(.9); }
+  .stills figure:hover img { transform: scale(1.04); filter: saturate(1); }
+  .stills figure:nth-child(even) { margin-top: clamp(24px, 6vw, 80px); }
+  figcaption { font-family: var(--serif); font-style: italic; font-size: 17px; color: var(--muted); padding-top: 10px; }
+
+  /* ---------- about ---------- */
+  .about { max-width: 880px; margin: 0 auto; text-align: center; }
+  .about h2 { margin-bottom: 36px; }
+  .about p { color: #4a505b; max-width: 60ch; margin: 0 auto; }
+  .about p + p { margin-top: 1.1em; }
+  .quote { font-family: var(--serif); font-style: italic; font-size: clamp(22px, 2.6vw, 30px); color: var(--ink); margin-top: 48px !important; }
+
+  /* ---------- contact ---------- */
+  .contact { text-align: center; background: var(--ink); color: var(--mist); }
+  .contact .label { color: rgba(242,241,239,.55); }
+  .contact .label::after { background: rgba(242,241,239,.18); }
+  .contact h2 { margin-bottom: 18px; }
+  .contact p { color: rgba(242,241,239,.7); margin-bottom: 44px; }
+  .links { display: flex; justify-content: center; flex-wrap: wrap; gap: 14px; }
+  .links a {
+    display: inline-block; text-decoration: none;
+    border: 1px solid rgba(242,241,239,.4); padding: 15px 30px;
+    font-size: 12px; letter-spacing: .28em; text-transform: uppercase;
+    transition: background .4s, color .4s;
+  }
+  .links a:hover { background: var(--mist); color: var(--ink); }
+  footer { background: var(--ink); color: rgba(242,241,239,.4); text-align: center; font-size: 11px; letter-spacing: .24em; text-transform: uppercase; padding: 0 var(--gutter) 40px; }
+
+  /* ---------- reveal ---------- */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 1.4s ease, transform 1.4s cubic-bezier(.2,.7,.2,1); }
+  .reveal.in { opacity: 1; transform: none; }
+
+  @media (max-width: 760px) {
+    nav a:not(:last-child) { display: none; }
+    .film { grid-template-columns: 1fr; }
+    .frame { max-width: 380px; width: 100%; margin: 0 auto; }
+    .stills { grid-template-columns: repeat(2, 1fr); }
+    .stills figure:nth-child(even) { margin-top: 40px; }
+    .links { flex-direction: column; align-items: stretch; max-width: 340px; margin: 0 auto; }
+    .links a { white-space: nowrap; letter-spacing: .2em; padding: 15px 12px; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hero-img { animation: none; }
+    .reveal { opacity: 1; transform: none; transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<header id="top">
+  <a class="mark" href="#">HAZE WHITE</a>
+  <nav>
+    <a href="#work">Work</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </nav>
+</header>
+
+<main>
+  <div class="hero">
+    <div class="hero-img" role="img" aria-label="A woman in a white gown, eyes closed, hair lifted by the wind"></div>
+    <div class="hero-text">
+      <p class="eyebrow">AI Visual Artist</p>
+      <h1>Haze White</h1>
+      <p class="lede">Cinematic portraits and quiet films, suspended somewhere between mist and memory.</p>
+    </div>
+  </div>
+
+  <section id="work">
+    <div class="label">Featured Film</div>
+    <div class="film">
+      <div class="frame reveal">
+        <video id="film" src="assets/snow-dance.mp4" poster="assets/ascent.jpg" autoplay muted loop playsinline preload="metadata"></video>
+        <button class="sound" id="sound" type="button" aria-pressed="false">Sound off</button>
+      </div>
+      <div class="reveal">
+        <h2>Snow Dance</h2>
+        <p class="film-meta">Short film &nbsp;·&nbsp; 2026 &nbsp;·&nbsp; 0:17</p>
+        <p>A figure in white moves through a mountain storm — half hidden, half revealed, never quite within reach.</p>
+        <p>Wind, silence, and a single burst of snow. A study in atmosphere and mystery.</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding-top:0">
+    <div class="label">Stills — Snow Dance</div>
+    <div class="stills">
+      <figure class="reveal"><div class="ph"><img src="assets/ascent.jpg" alt="Woman in a flowing white gown looking up toward snowy peaks" loading="lazy"></div><figcaption>Ascent</figcaption></figure>
+      <figure class="reveal"><div class="ph"><img src="assets/turn.jpg" alt="Woman lifting the hem of her white gown mid-turn in the snow" loading="lazy"></div><figcaption>Turn</figcaption></figure>
+      <figure class="reveal"><div class="ph"><img src="assets/drift.jpg" alt="Snow bursting around a woman in a white gown" loading="lazy"></div><figcaption>Drift</figcaption></figure>
+      <figure class="reveal"><div class="ph"><img src="assets/stillness.jpg" alt="Close portrait of a woman with eyes closed, hair in the wind" loading="lazy"></div><figcaption>Stillness</figcaption></figure>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="about reveal">
+      <div class="label">About</div>
+      <h2>Where portraiture<br>meets possibility</h2>
+      <p>Haze White is an AI visual artist and brand consultant, combining the soul of portraiture with the power of generative technology.</p>
+      <p>The work lives in soft light and cool air — portraits and short films with a cinematic, atmospheric restraint, made to feel human first.</p>
+      <p class="quote">“Turning code into art, one pixel at a time.”</p>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <div class="label">Contact</div>
+    <h2>Let’s create something</h2>
+    <p>For collaborations, commissions and brand projects.</p>
+    <div class="links">
+      <a href="https://www.instagram.com/hazewhite.world/" target="_blank" rel="noopener">Instagram &nbsp;@hazewhite.world</a>
+      <a href="https://hazewhite.com" target="_blank" rel="noopener">hazewhite.com</a>
+    </div>
+  </section>
+</main>
+
+<footer>© 2026 Haze White</footer>
+
+<script>
+  const header = document.querySelector("header");
+  const onScroll = () => header.classList.toggle("solid", window.scrollY > 40);
+  addEventListener("scroll", onScroll, { passive: true }); onScroll();
+
+  const io = new IntersectionObserver(entries => entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); }
+  }), { threshold: .15 });
+  document.querySelectorAll(".reveal").forEach(el => io.observe(el));
+
+  const film = document.getElementById("film"), btn = document.getElementById("sound");
+  btn.addEventListener("click", () => {
+    film.muted = !film.muted;
+    if (!film.muted) { film.currentTime = 0; film.play(); }
+    btn.textContent = film.muted ? "Sound off" : "Sound on";
+    btn.setAttribute("aria-pressed", String(!film.muted));
+  });
+</script>
+</body>
+</html>
